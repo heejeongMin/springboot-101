@@ -27,5 +27,6 @@ repositories  {
 
 dependencies {// 프로젝트 개발에 필요한 의존성을 선언하는 곳
     compile('org.springframework.boot:spring-boot-starter-web') //버전을 명시하지 않아야 맨위에 작성한 springBootVersion 변수에서 정한 버전을 따라간다.
+    compile('org.projectlombok:lombok:')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
