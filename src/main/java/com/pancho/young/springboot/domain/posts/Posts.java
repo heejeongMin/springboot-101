@@ -1,5 +1,6 @@
 package com.pancho.young.springboot.domain.posts;
 
+import com.pancho.young.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ Posts 클래스는 실제 DB 테이블과 매칭된 클래스이며, Entity 클�
 @Entity //JPA 어노테이션. 테이블과 링크될 클래스를 나타냄.
         //기본값으로 클래스의 카멜케이스 이름을 언더스코어네이밍으로 테이블 이름을 매칭함
         // ex) SalesManager.java -> sales_manager table
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id //PK를 나타냄냄
     @GeneratedValue(strategy = GenerationType.IDENTITY) // pk의 생성규칙을 나타냄
@@ -47,5 +48,10 @@ public class Posts {
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 }
