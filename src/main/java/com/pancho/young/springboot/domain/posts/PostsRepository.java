@@ -1,6 +1,9 @@
 package com.pancho.young.springboot.domain.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /*
 SQL Mapper인 MyBatis에서는 DAO라고 불리는 DB Layer 접근자가 있고,
@@ -12,6 +15,16 @@ JpaRepository<Entity 클래스, PK타입> 상속하여 CRUD 메서도르르 자�
 
  */
 public interface PostsRepository extends JpaRepository<Posts, Long> {
+
+    /*
+        규모가 있는 프로젝트에서 데이터 조회는 FK 조인, 복잡한 조인 조건 등으로 Entity 클래스 만으로는 처리가 힘들어 조회용 프레임워크를 추가로 사용한다.
+        대표적인 예로 querydsl, jooq, MyBatis등이 있고, 조회는 이 3가지 프레임워크 중 하나를 사용하고, 등록/수정/삭제는 SpringDataJpa를 통해 진행함.
+
+        querydsl 같은경우, 타입안정성 보장, 국내 많은 회사에서 사용하고있다.
+
+    */
+    @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
+    List<Posts> findAllDesc();
 
 
 }

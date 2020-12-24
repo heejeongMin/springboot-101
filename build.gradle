@@ -1,10 +1,12 @@
 buildscript{ //이 프로젝트의 플러그인 의존성 관리를 위한 설정
     ext{ //ext라는 키워드는 build.gradle에서 사용하는 전역변수를 설정하겠다는 의미
-        springBootVersion = '2.1.7.RELEASE'
+        //springBootVersion = '2.1.7.RELEASE'
+        springBootVersion = '2.2.0.RELEASE'
     }
     repositories {// 각종 의존성들을 어떤 원격 저장소에서 받을지 정함.
-        mavenCentral()
-        jcenter()//기존에는 mavenCentral을 많이 사용하였지만, 라이브러리 업로드 난이도로 jcenter도 많이 사용함
+        maven { url "http://nexus.interpark.com:8888/nexus/content/repositories/central" }
+//        mavenCentral()
+//        jcenter()//기존에는 mavenCentral을 많이 사용하였지만, 라이브러리 업로드 난이도로 jcenter도 많이 사용함
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -13,6 +15,7 @@ buildscript{ //이 프로젝트의 플러그인 의존성 관리를 위한 설�
 
 /* 스프링 부트를 사용하기 위해 꼭 필요한 플러그인 */
 apply plugin: 'java'
+apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -22,10 +25,11 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories  {
-    mavenCentral()
+    maven { url "http://nexus.interpark.com:8888/nexus/content/repositories/central" }
 }
 
 dependencies {// 프로젝트 개발에 필요한 의존성을 선언하는 곳
+    compile('org.springframework.boot:spring-boot-starter-mustache:2.1.5.RELEASE') //회사 nexus에 2.1.5만 있어서 일단 버전 명시
     compile('org.springframework.boot:spring-boot-starter-web') //버전을 명시하지 않아야 맨위에 작성한 springBootVersion 변수에서 정한 버전을 따라간다.
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa') //스프링 부트용 Spring Data Jpa 추상화 라이브러리
