@@ -45,7 +45,7 @@ public class OAuthAttributes {
                     .name(name)
                     .email(email)
                     .picture(picture)
-                    .role(Role.GUEST)
+                    .role(Role.GUEST) //OAuthAttributes에서 엔티티를 생성하는 시점은 처음 가입할때이고, 기본 권한을 GUEST로 준다.
                     .build();
     }
 }
