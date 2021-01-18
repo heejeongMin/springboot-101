@@ -19,7 +19,7 @@ before_install:
   - chmod +x gradlew
 
 before_deploy:
-  - zip -r springboot-101
+  - zip -r springboot-101 ./*
   - mkdir -p deploy
   - mv springboot-101.zip deploy/springboot-101.zip
 
